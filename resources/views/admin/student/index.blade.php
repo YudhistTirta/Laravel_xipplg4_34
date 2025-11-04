@@ -3,7 +3,7 @@
 @section('title', 'Data Siswa')
 
 @section('content')
-<div class="container">
+<div class="container student-page-futuristic"> {{-- LIHAT PERUBAHAN DI SINI --}}
   <h1 class="mb-4">Data Siswa</h1>
       <a href="{{ route('admin.students.create') }}" class="btn btn-primary mb-3">+ Tambah Siswa</a>
 

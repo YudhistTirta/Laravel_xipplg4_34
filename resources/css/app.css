@@ -1,2 +1,702 @@
 @import "admin-lte/dist/css/adminlte.css";
 @import "bootstrap/dist/css/bootstrap.css";
+/* === HINDIA ALBUMS THEME CSS === */
+/* Inspired by: Lagi Pula Hidup Akan Berakhir, Menari dengan Bayangan, Doves' 25 On Blank Canvas */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+/* Background dengan gradasi dari ketiga album */
+body {
+    background: 
+        linear-gradient(135deg, 
+            #f4e4d7 0%,      /* Doves - Canvas putih */
+            #e8dcd0 20%,
+            #d4e4f7 40%,     /* LHAB - Biru langit */
+            #c8d8e8 60%,
+            #e0d5c8 80%,     /* MDB - Earth tone */
+            #dcc5b0 100%
+        ) !important;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Noise texture untuk efek vintage */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Merpati terbang (Doves) */
+body::after {
+    content: '🕊️';
+    position: fixed;
+    font-size: 2.5rem;
+    animation: doveFly 40s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes doveFly {
+    0% { 
+        left: -80px; 
+        top: 15%;
+        transform: rotate(-10deg);
+    }
+    25% {
+        top: 25%;
+        transform: rotate(0deg);
+    }
+    50% { 
+        left: 50%; 
+        top: 20%;
+        transform: rotate(5deg);
+    }
+    75% {
+        top: 30%;
+        transform: rotate(-5deg);
+    }
+    100% { 
+        left: calc(100% + 80px); 
+        top: 15%;
+        transform: rotate(10deg);
+    }
+}
+
+/* Bayangan penari (MDB) - subtle shadow animation */
+@keyframes dancingShadow {
+    0%, 100% { 
+        transform: translateX(0) scaleX(1);
+        opacity: 0.15;
+    }
+    50% { 
+        transform: translateX(10px) scaleX(1.1);
+        opacity: 0.25;
+    }
+}
+
+/* Sidebar dengan nuansa album */
+.sidebar,
+nav,
+aside {
+    background: linear-gradient(180deg, 
+        #2d3142 0%,      /* Dark base */
+        #3f4354 50%,
+        #4a5568 100%
+    ) !important;
+    border-right: 3px solid #d4a574 !important;
+    box-shadow: 
+        4px 0 20px rgba(0, 0, 0, 0.15),
+        inset -1px 0 0 rgba(212, 165, 116, 0.1);
+    position: relative;
+}
+
+/* Dekorasi malaikat di sidebar (LHAB) */
+.sidebar::before {
+    content: '👼';
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    font-size: 2rem;
+    opacity: 0.15;
+    animation: angelGlow 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes angelGlow {
+    0%, 100% { 
+        opacity: 0.15;
+        transform: translateY(0);
+    }
+    50% { 
+        opacity: 0.25;
+        transform: translateY(-5px);
+    }
+}
+
+/* Menu items */
+.sidebar a,
+nav a,
+aside a {
+    color: #e8d5c4 !important;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Bayangan saat hover (MDB inspiration) */
+.sidebar a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 60%;
+    background: linear-gradient(90deg, 
+        rgba(212, 165, 116, 0.3),
+        transparent
+    );
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.sidebar a:hover::before {
+    width: 100%;
+}
+
+.sidebar a::after {
+    content: '♪';
+    position: absolute;
+    right: 20px;
+    opacity: 0;
+    color: #8eb4d9;  /* LHAB blue */
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover,
+nav a:hover,
+aside a:hover {
+    background: linear-gradient(90deg,
+        rgba(142, 180, 217, 0.15),   /* LHAB blue */
+        rgba(212, 165, 116, 0.15)     /* Warm tone */
+    ) !important;
+    color: #d4a574 !important;
+    border-left: 4px solid #8eb4d9;
+    padding-left: 20px !important;
+    transform: translateX(5px);
+}
+
+.sidebar a:hover::after {
+    opacity: 1;
+    right: 15px;
+}
+
+/* Logo dengan kombinasi warna album */
+h1,
+.logo-text,
+[class*="Dilesin"] {
+    font-family: 'DM Serif Display', serif !important;
+    background: linear-gradient(135deg, 
+        #2d3142 0%,      /* Dark */
+        #8eb4d9 50%,     /* LHAB blue */
+        #2d3142 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.5rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Judul halaman dengan elemen tiga album */
+h1 {
+    font-family: 'DM Serif Display', serif !important;
+    color: #2d3142 !important;
+    font-size: 3.5rem;
+    position: relative;
+    padding-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Garis bawah judul dengan gradient tiga warna */
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 180px;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        #8eb4d9 0%,      /* LHAB blue */
+        #d4a574 50%,     /* Warm */
+        #6d7a8e 100%     /* MDB shadow */
+    );
+    border-radius: 2px;
+}
+
+/* Merpati dekoratif di judul (Doves) */
+h1::before {
+    content: '🕊️';
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    opacity: 0.2;
+}
+
+/* Buttons dengan style album */
+button,
+.btn {
+    background: linear-gradient(135deg, 
+        #d4a574 0%,      /* Warm base */
+        #c49463 50%,
+        #8eb4d9 100%     /* LHAB accent */
+    ) !important;
+    color: #2d3142 !important;
+    border: 2px solid #b88454 !important;
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+    padding: 12px 28px;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 12px rgba(142, 180, 217, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek bayangan pada button (MDB) */
+button::before,
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+button:hover::before,
+.btn:hover::before {
+    left: 100%;
+}
+
+button:hover,
+.btn:hover {
+    background: linear-gradient(135deg, 
+        #8eb4d9 0%,      /* LHAB blue dominant */
+        #c49463 50%,
+        #b88454 100%
+    ) !important;
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 20px rgba(142, 180, 217, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Table dengan aesthetic album */
+table {
+    background: #fff !important;
+    border: none !important;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 40px rgba(142, 180, 217, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+/* Bayangan table (MDB inspiration) */
+table::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    right: 20px;
+    height: 10px;
+    background: radial-gradient(ellipse at center,
+        rgba(45, 49, 66, 0.2) 0%,
+        transparent 70%
+    );
+    animation: dancingShadow 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Table header dengan gradient album */
+thead,
+thead tr,
+thead th {
+    background: linear-gradient(135deg, 
+        #2d3142 0%,
+        #3f4354 50%,
+        #4a5d7a 100%     /* Hint of LHAB blue */
+    ) !important;
+    color: #e8d5c4 !important;
+    font-family: 'Space Mono', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    border: none !important;
+    padding: 20px 15px !important;
+    position: relative;
+}
+
+/* Garis biru subtle di header (LHAB) */
+thead::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #8eb4d9 50%,
+        transparent 100%
+    );
+}
+
+/* Table body */
+tbody tr {
+    background: #fff !important;
+    border-bottom: 1px solid #e8dcd0 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+tbody tr:nth-child(odd) {
+    background: linear-gradient(90deg,
+        #faf8f5 0%,
+        #f7f5f2 100%
+    ) !important;
+}
+
+/* Hover dengan efek bayangan menari (MDB) */
+tbody tr:hover {
+    background: linear-gradient(90deg,
+        #f0eef4 0%,      /* Hint of LHAB blue */
+        #f4ede4 100%
+    ) !important;
+    transform: translateX(6px);
+    box-shadow: -6px 0 0 #8eb4d9;
+}
+
+tbody tr:hover::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(142, 180, 217, 0.1)
+    );
+}
+
+/* Table cells */
+td {
+    color: #2d3142 !important;
+    padding: 18px 15px !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Highlight columns dengan warna album */
+td:first-child {
+    color: #8eb4d9 !important;  /* LHAB blue */
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+
+td:nth-child(2) {
+    color: #b88454 !important;  /* Warm tone */
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+}
+
+td:nth-child(5) {
+    color: #6d7a8e !important;  /* MDB shadow tone */
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+}
+
+/* Action buttons - Lihat (Doves white/cream) */
+button[class*="orange"],
+.btn-lihat,
+td button:nth-of-type(1) {
+    background: linear-gradient(135deg, #f4e4d7 0%, #e8d5c4 100%) !important;
+    color: #2d3142 !important;
+    border: 2px solid #d4a574 !important;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+}
+
+/* Action buttons - Edit (LHAB blue) */
+button[class*="purple"],
+.btn-edit,
+td button:nth-of-type(2) {
+    background: linear-gradient(135deg, #8eb4d9 0%, #6a91ba 100%) !important;
+    color: #fff !important;
+    border: 2px solid #6a91ba !important;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+}
+
+/* Action buttons - Hapus (MDB shadow/dark) */
+button[class*="dark"],
+.btn-hapus,
+td button:nth-of-type(3) {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3142 100%) !important;
+    color: #e8d5c4 !important;
+    border: 2px solid #2d3142 !important;
+    padding: 10px 18px;
+    font-size: 0.8rem;
+}
+
+/* All action buttons hover */
+td button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(142, 180, 217, 0.3);
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+    background: #fff !important;
+    border: 2px solid #e8dcd0 !important;
+    color: #2d3142 !important;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #8eb4d9 !important;  /* LHAB blue */
+    box-shadow: 
+        0 0 0 4px rgba(142, 180, 217, 0.1),
+        0 2px 8px rgba(142, 180, 217, 0.15);
+    background: #fafcfe !important;
+}
+
+/* Labels */
+label {
+    color: #2d3142 !important;
+    font-family: 'Space Mono', monospace;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* Cards */
+.card,
+.panel {
+    background: linear-gradient(135deg,
+        #fff 0%,
+        #fafcfe 100%
+    ) !important;
+    border: 2px solid #e8dcd0 !important;
+    border-left: 4px solid #8eb4d9 !important;  /* LHAB accent */
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 20px rgba(142, 180, 217, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    position: relative;
+}
+
+/* Merpati kecil di card (Doves) */
+.card::before,
+.panel::before {
+    content: '🕊️';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.2rem;
+    opacity: 0.08;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+    background: linear-gradient(180deg, #e8dcd0, #d4e4f7);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, 
+        #8eb4d9 0%,      /* LHAB */
+        #d4a574 50%,     /* Warm */
+        #6d7a8e 100%     /* MDB */
+    );
+    border-radius: 6px;
+    border: 2px solid #e8dcd0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, 
+        #6a91ba 0%,
+        #c49463 50%,
+        #5a6575 100%
+    );
+}
+
+/* Tabs */
+.nav-tabs a,
+.tab-link {
+    color: #2d3142 !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    font-family: 'Space Mono', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 12px 24px;
+    position: relative;
+}
+
+.nav-tabs a::before,
+.tab-link::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        #8eb4d9 0%,
+        #d4a574 50%,
+        #6d7a8e 100%
+    );
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-tabs a:hover,
+.tab-link:hover {
+    background: rgba(142, 180, 217, 0.05) !important;
+    color: #8eb4d9 !important;
+}
+
+.nav-tabs a:hover::before,
+.tab-link:hover::before {
+    transform: scaleX(0.5);
+}
+
+.nav-tabs a.active,
+.tab-link.active {
+    background: transparent !important;
+    color: #8eb4d9 !important;
+}
+
+.nav-tabs a.active::before,
+.tab-link.active::before {
+    transform: scaleX(1);
+}
+
+/* Alert */
+.alert,
+.notification {
+    background: linear-gradient(135deg,
+        #fafcfe 0%,
+        #f0f4f8 100%
+    ) !important;
+    border-left: 4px solid #8eb4d9 !important;
+    color: #2d3142 !important;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 12px rgba(142, 180, 217, 0.15);
+}
+
+/* Penari bayangan di sidebar bawah (MDB) */
+.sidebar::after {
+    content: '💃';
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    font-size: 1.8rem;
+    opacity: 0.2;
+    pointer-events: none;
+    animation: dancingShadow 4s ease-in-out infinite;
+}
+
+/* Floating elements container */
+.floating-doves {
+    position: fixed;
+    top: 30%;
+    right: 5%;
+    font-size: 1.5rem;
+    opacity: 0.1;
+    animation: gentleFloat 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes gentleFloat {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.1;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(5deg);
+        opacity: 0.15;
+    }
+}
+
+/* Badge dengan warna album */
+.badge,
+.tag {
+    background: linear-gradient(135deg, #8eb4d9, #d4a574) !important;
+    color: #fff !important;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(142, 180, 217, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h1::before {
+        display: none;
+    }
+    
+    body::after {
+        font-size: 2rem;
+    }
+    
+    table {
+        font-size: 0.85rem;
+    }
+    
+    td button {
+        padding: 8px 14px;
+        font-size: 0.75rem;
+    }
+}
