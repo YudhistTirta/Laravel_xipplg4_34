@@ -107,7 +107,7 @@
                         {{-- Sub-Item: Kelas (Contoh) --}}
                         <li class="nav-item">
                             {{-- Ganti '#' dengan route Anda, misal: route('admin.classes.index') --}}
-                            <a href="#" class="nav-link {{ request()->is('admin/classes*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.classes.index') }}" class="nav-link {{ request()->is('admin/classes*') ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Data Kelas</p>
                             </a>

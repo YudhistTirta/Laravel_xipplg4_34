@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaandingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\SchoolClassController;
 
 Route::get('/', [LaandingController::class, 'index'])->name('landing');
 
@@ -12,4 +13,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('students', StudentController::class);
+
+    Route::resource('classes', SchoolClassController::class);
 });
